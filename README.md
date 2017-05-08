@@ -29,7 +29,7 @@ Example 2: "User 24" wants to access the same resource "Resource X46". In this c
 ```
 So, "User 24" has "read" permission on "Resource X46" due to its membership of "User Group A".
 
-So in conclusion, permissions are given to Users and/or Groups to Resources and/or Resource Types OF Resources. A permission on a resource affects the permission you have on children of that resource.
+So in conclusion, permissions are given to Users and/or Groups to Resources and/or Resource Types OF Resources. A permission on a resource affects the permission you have on the children of that resource as well.
 
 
 

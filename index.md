@@ -56,22 +56,11 @@ POST /rights/resources
   parentId: {your-domain-id}
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Registering Resources
+## Creating Groups
+## Joining Users to Groups
+## Setting Permissions
+## Checking Permissions
 
 
 

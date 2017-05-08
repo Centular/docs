@@ -11,6 +11,8 @@ The CONTENT tree of a RESOURCE can be mirrored with a similar structure for USER
 PERMISSIONS form the link between the MEMBERSHIP and CONTENT trees, and the shortest route between a USER and a RESOURCE or RESOURCE TYPE along this link resolves to the USER's PERMISSION to the RESOURCE
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
+![Permission Tree Concept](https://github.com/Centular/docs/blob/master/images/permission-tree.png)
+
 ```markdown
 Syntax highlighted code block
 

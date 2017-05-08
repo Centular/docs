@@ -32,10 +32,38 @@ So, "User 24" has "read" permission on "Resource X46" due to its membership of "
 So in conclusion, permissions are given to Users and/or Groups to Resources and/or Resource Types OF Resources. A permission on a resource affects the permission you have on the children of that resource as well.
 
 ## Your Content Root
-
+The domain you've registered with Centular forms your content root and will be your starting point.
+The domain itself is a Resource with an ID. This id can be found by calling GET /domains, or preferably finding the domain id within the current user's JWT token returned when authenticated.
+** Authentication Process citation needed **
 
 ## Resource Types
-In order to register any resource, you will need a resource type to identify the collection under which to put your new resource. 
+In order to register any resource, you will need a resource type to identify the collection under which to put your new resource.
+Resource Types can be found as content in your domain under the "system.type" resource type collection. "system.type" is the resource type id, in other words, the type identifying all other types.
+Take note of the standard system types found there already:
+- "system.type.user"
+- "system.type.group"
+- "system.type.permission"
+
+The use of these will become clearer as we go through some examples.
+To manage resource types, use the resource api ![Resource API] (http://api-docs.centular.io/#/rights324532resource32types)
+and register your own resource types under your domain as if they are normal resources, specifying "system.type" as the resource type:
+```
+POST /rights/resources
+{
+  id: {your-resource-type-id}, (e.g. "my-type-product")
+  name: {some human readable name}, (Preferably in plural form as a resource type identifies a collection)
+  resourceTypeId: "system.type",
+  parentId: {your-domain-id}
+}
+GET /rights/resources?parent_id={your-domain-id}&resource_type_id=system.type
+DELETE /rights/resources/{resource-type-id}
+```
+
+
+
+
+
+
 
 
 

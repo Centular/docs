@@ -17,13 +17,13 @@ In the diagram above, Resource P213 is our reference node. It has one user group
 
 Permissions are evaluated bottom-up, meaning, the content tree is traversed from the accessed resource in the the reverse direction until a PERMISSION link is found between the user MEMBERSHIP tree and the resource's CONTENT tree (or none is found, in which case acces is denied).
 
-Example 1: "User 87" wants to access "Resource X46" way at the bottom, so the applied permission path will be:
+**Example 1:** "User 87" wants to access "Resource X46" way at the bottom, so the applied permission path will be:
 ```
 ("User 87") -> [PERMISSION {read,write,delete}] -> ("Resource A332") -> [CONTENT link] -> ("Resource Type X") -> [CONTENT link] -> ("Resource X46")
 ```
 So "User 87" has "read", "write" and "delete" permission to "Resource X46", and for that matter any resource under "Resource A 322"
 
-Example 2: "User 24" wants to access the same resource "Resource X46". In this case, "User 24" has no direct permission to any parent in the CONTENT tree, but it's a member of "User Group A" that does:
+**Example 2:** "User 24" wants to access the same resource "Resource X46". In this case, "User 24" has no direct permission to any parent in the CONTENT tree, but it's a member of "User Group A" that does:
 ```
 ("User 24") -> [MEMBER_OF] -> ("User Group A") -> [PERMISSION {read}] -> ("Resource Type A") -> [CONTENT] -> ("Resource A332") -> [CONTENT] -> ("Resource Type X") -> [CONTENT] -> ("Resource X46")
 ```
@@ -31,7 +31,11 @@ So, "User 24" has "read" permission on "Resource X46" due to its membership of "
 
 So in conclusion, permissions are given to Users and/or Groups to Resources and/or Resource Types OF Resources. A permission on a resource affects the permission you have on the children of that resource as well.
 
+## Your Content Root
 
+
+## Resource Types
+In order to register any resource, you will need a resource type to identify the collection under which to put your new resource. 
 
 
 

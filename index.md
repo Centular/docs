@@ -10,6 +10,8 @@ The CONTENT tree of a RESOURCE can be mirrored with a similar structure for USER
 
 PERMISSIONS form the link between the MEMBERSHIP and CONTENT trees, and the shortest route between a USER and a RESOURCE or RESOURCE TYPE along this link resolves to the USER's PERMISSION to the RESOURCE
 
+<img href="https://github.com/Centular/docs/blob/master/images/permission-tree.png">
+
 ![Permission Tree Concept](https://github.com/Centular/docs/blob/master/images/permission-tree.png)
 
 In the diagram above, Resource P213 is our reference node. It has one user group "User Group A" with two users, "User 24" and "User 87". Down its content tree it has a group of resources of type "Resource Type A". There can be multiple collections with different types under a resource as shown by "Resource Type n".

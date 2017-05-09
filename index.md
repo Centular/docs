@@ -167,27 +167,46 @@ Response body:
   count: 4,
   pageNumber: 0,
   results: [{
-    id: "7fb8a67f-5e10-4607-bc71-d2cebbae1ee2"
+    id: "148a3a24-99f5-4eea-a85f-057e0bce0a38"
     name: "Store Managers"
   },{
-    id: "c7fe4129-550c-4961-84e8-e8c4b1ced44c"
+    id: "4b8e1da6-b07e-4722-b870-ca93439d45c8"
     name: "Point of Sales"
   },{
-    id: "49872e59-72fa-4a14-aed2-abe96ff30674"
+    id: "fee7a235-e0c3-4d57-9be2-7cd26ec9c263"
     name: "Kitchen Staff"
   },{
-    id: "c3615a3e-700f-4121-a439-392273c7489c"
+    id: "07c35d31-4448-46fe-a04d-5384cb9d2749"
     name: "Cleaners"
   }],
   total: 4  
 }
 ```
+## Setting Permissions
+Lets give our groups some permissions. Store Managers can do everything so they will get full permissions at their respective branches.
+Lets set Store Managers of the New York branch's permissions:
+```
+POST /rights/groups/7fb8a67f-5e10-4607-bc71-d2cebbae1ee2/resource-permissions
+{
+  resourceId: "9c0b2919-e5cc-447a-acd0-f5dc964d35d6", (The New York branch id)
+  permission: 15
+}
+```
+...and Store Managers at London:
+```
+POST /rights/groups/148a3a24-99f5-4eea-a85f-057e0bce0a38/resource-permissions
+{
+  resourceId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  permission: 15
+}
+```
+So, Store Managers will have permission 15 to any resources created under their respective branch.
 
 
 
 
 ## Joining Users to Groups
-## Setting Permissions
+
 ## Checking Permissions
 
 

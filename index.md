@@ -36,34 +36,120 @@ The domain you've registered with Centular forms your content root and will be y
 The domain itself is a Resource with an ID. This id can be found by calling GET /domains, or preferably finding the domain id within the current user's JWT token returned when authenticated.
 **Authentication Process citation needed**
 
+## Walkthrough: Restaurant Franching
 ## Resource Types
 In order to register any resource, you will need a resource type to identify the collection under which to put your new resource.
 Resource Types can be found as content in your domain under the "system.type" resource type collection. **"system.type"** is the resource type id, in other words, the type identifying all other types.
 Take note of the standard system types found there already:
+```
+GET /rights/resources?parent_id={yout-domain-id}&resource_type_id=system.type:
+```
 - "system.type.user"
 - "system.type.group"
 - "system.type.permission"
 
 The use of these will become clearer as we go through some examples.
 To manage resource types, use the [Resource API](http://api-docs.centular.io/#/rights324532resource32types)
-and register your own resource types under your domain as if they are normal resources, specifying **"system.type"** as the resource type: e.g.
+and register your own resource types under your domain as if they are normal resources, specifying **"system.type"** as the resource type.
+Our company (The Burger Palace) will have a collection of franchises, each franchise will accept orders, each order will have items associated. So lets create these resource types:
 ```
 POST /rights/resources
 {
   parentId: "{your-domain-id}", (Your domain id will be a UUID e.g. "e4a68bbe-1cb7-42f4-8ab9-a3a7950128f5")
   resourceTypeId: "system.type",
   resources: [{
-    id: "mycompany-type-branch"
-    name: "Branches", (Preferably in plural form as a resource type identifies a collection)
+    id: "burgerpalice-type-franchise"
+    name: "Franchises"
+  },{
+    id: "burgerpalice-type-order"
+    name: "Orders"
+  },{
+    id: "burgerpalice-type-item"
+    name: "Items"
   }]
 }
 ```
+Check if they've been created:
+```
+GET /rights/resources?parent_id={your-domain-id}&resource_type_id=system.type
+{
+  count: 6,
+  pageNumber: 0,
+  results: [{
+    id: "system.type.user"
+    name: "Users"
+  },{
+    id: "system.type.group"
+    name: "Groups"
+  },{
+    id: "system.type.permission"
+    name: "Permissions"
+  },{
+    id: "burgerpalice-type-franchise"
+    name: "Franchises"
+  },{
+    id: "burgerpalice-type-order"
+    name: "Orders"
+  },{
+    id: "burgerpalice-type-item"
+    name: "Items"
+  }],
+  total: 6
+}
+```
+
 ## Registering Resources
-Register resources using the same call above with appropriate parameters:
-
-
+Our company has two stores, one in New York and one in London:
+```
+POST /rights/resources
+{
+  parentId: "{your-domain-id}"
+  resourceTypeId: "mcdonalds-type-franchise",
+  resources: [{
+    id: "9c0b2919-e5cc-447a-acd0-f5dc964d35d6",
+    name: "Burger Palace, New York"
+  },{
+    id: "61c06c24-dccb-4c31-975b-d5f86283f6cf",
+    name: "Burger Palace, London"
+  }]
+}
+```
 
 ## Creating Groups
+We are going to have staff, so lets create some groups at our franchises to put them in. 
+Groups at New York branch:
+```
+POST /rights/groups
+{
+  parentId: "9c0b2919-e5cc-447a-acd0-f5dc964d35d6" (Burger Palace, New York's id)
+  groupNames: ["Store Managers","Point of Sales","Kitchen Staff"]
+}
+```
+Groups at Londen branch:
+
+```
+POST /rights/groups
+{
+  parentId: "61c06c24-dccb-4c31-975b-d5f86283f6cf" (Burger Palace, London's id)
+  groupNames: ["Store Managers","Point of Sales","Kitchen Staff","Cleaners"]
+}
+```
+Lets check if these are now in place. Groups are also normal resources, so to get the groups at a certain place, use the normal find resources call and specify "system.type.group" as the type of sub resources to get:
+Lets look at New York's groups:
+```
+GET /rights/resources?parent_id=9c0b2919-e5cc-447a-acd0-f5dc964d35d6&resource_type_id=system.type.group
+{
+  
+}
+[{
+  parentId: "61c06c24-dccb-4c31-975b-d5f86283f6cf" (Burger Palace, London's id)
+  groupNames: ["Store Managers","Point of Sales","Kitchen Staff","Cleaners"]
+}]
+```
+
+
+
+
 ## Joining Users to Groups
 ## Setting Permissions
 ## Checking Permissions

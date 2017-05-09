@@ -183,8 +183,20 @@ Response body:
 }
 ```
 ## Setting Permissions
+### Permission Value Definition
+Permission are represented by a 1 byte value. The first 4 bits are used to flag the actions permitted.
+So if we look at a byte in binary form, the actions are listed from right to left where
+
+- read   = decimal 1 = binary 0000 0001 = The resource can be viewed
+- write  = decimal 2 = binary 0000 0010 = The resource can be changed
+- delete = decimal 4 = binary 0000 0100 = The resource can be deleted
+- permit = decimal 8 = binary 0000 1000 = The resource can be permitted to users/groups
+
+The top 4 bits are unused and reserved for future use.
+So a permission value of 15 (binary 0000 1111) means all actions are switched on, thus full permission.
+
 Lets give our groups some permissions. Store Managers can do everything so they will get full permissions at their respective branches.
-Lets set Store Managers of the New York branch's permissions:
+Lets set Store Managers of the New York branch permissions:
 ```
 POST /rights/groups/7fb8a67f-5e10-4607-bc71-d2cebbae1ee2/resource-permissions
 {
@@ -200,7 +212,47 @@ POST /rights/groups/148a3a24-99f5-4eea-a85f-057e0bce0a38/resource-permissions
   permission: 15
 }
 ```
-So, Store Managers will have permission 15 to any resources created under their respective branch.
+So, Store Managers will have permission 15 (full permission) to any resources created under their respective branch.
+
+Let continue with the other groups.
+Point of Sales need to be able to create, view and remove orders at their respective branches.
+For this we use the /resource-type-permissions call to set permissions on a collection of a certain type belonging to some resource, the parent. So its as good as saying; New York Point of Sales group can read, write and delete orders at the New York branch:
+```
+POST /rights/groups/c7fe4129-550c-4961-84e8-e8c4b1ced44c/resource-type-permissions
+{
+  parentId: "9c0b2919-e5cc-447a-acd0-f5dc964d35d6", (The New York branch id)
+  resourceTypeId: "burgerpalice-type-order"
+  permission: 7
+}
+```
+...and Point of Sales at London:
+```
+POST /rights/groups/4b8e1da6-b07e-4722-b870-ca93439d45c8/resource-permissions
+{
+  resourceId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  permission: 7
+}
+```
+
+Kitchen Staff should only be able to view orders so that they can prepare it.
+New York Kitchen Staff:
+```
+POST /rights/groups/49872e59-72fa-4a14-aed2-abe96ff30674/resource-type-permissions
+{
+  parentId: "9c0b2919-e5cc-447a-acd0-f5dc964d35d6", (The New York branch id)
+  resourceTypeId: "burgerpalice-type-order"
+  permission: 1
+}
+```
+...and London Kitchen Staff:
+```
+POST /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/resource-permissions
+{
+  resourceId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  permission: 1
+}
+```
+We will be leaving out Cleaners at London to illustrate denied access.
 
 
 
@@ -219,7 +271,7 @@ Syntax highlighted code block
 
 # Header 1
 ## Header 2
-### Header 3
+
 
 - Bulleted
 - List

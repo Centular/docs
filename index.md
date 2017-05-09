@@ -50,10 +50,12 @@ and register your own resource types under your domain as if they are normal res
 ```
 POST /rights/resources
 {
-  id: "organisation-type-branch"
-  name: "Branches", (Preferably in plural form as a resource type identifies a collection)
+  parentId: "{your-domain-id}", (Your domain id will be a UUID e.g. "e4a68bbe-1cb7-42f4-8ab9-a3a7950128f5")
   resourceTypeId: "system.type",
-  parentId: "e4a68bbe-1cb7-42f4-8ab9-a3a7950128f5" (Your domain id will be a UUID)
+  resources: [{
+    id: "mycompany-type-branch"
+    name: "Branches", (Preferably in plural form as a resource type identifies a collection)
+  }]
 }
 ```
 ## Registering Resources

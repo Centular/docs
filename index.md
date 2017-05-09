@@ -229,7 +229,8 @@ POST /rights/groups/c7fe4129-550c-4961-84e8-e8c4b1ced44c/resource-type-permissio
 ```
 POST /rights/groups/4b8e1da6-b07e-4722-b870-ca93439d45c8/resource-permissions
 {
-  resourceId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  parentId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  resourceTypeId: "burgerpalice-type-order"
   permission: 7
 }
 ```
@@ -248,7 +249,8 @@ POST /rights/groups/49872e59-72fa-4a14-aed2-abe96ff30674/resource-type-permissio
 ```
 POST /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/resource-permissions
 {
-  resourceId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  parentId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  resourceTypeId: "burgerpalice-type-order"
   permission: 1
 }
 ```

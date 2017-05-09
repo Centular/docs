@@ -72,6 +72,8 @@ POST /rights/resources
 Check if they've been created:
 ```
 GET /rights/resources?parent_id={your-domain-id}&resource_type_id=system.type
+
+Resonse body: 
 {
   count: 6,
   pageNumber: 0,
@@ -104,7 +106,7 @@ Our company has two stores, one in New York and one in London:
 POST /rights/resources
 {
   parentId: "{your-domain-id}"
-  resourceTypeId: "mcdonalds-type-franchise",
+  resourceTypeId: "burgerpalice-type-franchise",
   resources: [{
     id: "9c0b2919-e5cc-447a-acd0-f5dc964d35d6",
     name: "Burger Palace, New York"
@@ -125,7 +127,7 @@ POST /rights/groups
   groupNames: ["Store Managers","Point of Sales","Kitchen Staff"]
 }
 ```
-Groups at Londen branch:
+Groups at Londen branch (here have cleaners as well):
 
 ```
 POST /rights/groups
@@ -134,17 +136,51 @@ POST /rights/groups
   groupNames: ["Store Managers","Point of Sales","Kitchen Staff","Cleaners"]
 }
 ```
-Lets check if these are now in place. Groups are also normal resources, so to get the groups at a certain place, use the normal find resources call and specify "system.type.group" as the type of sub resources to get:
-Lets look at New York's groups:
+Lets check if these are now in place. Groups are also normal resources, so to get the groups at a certain place, use the normal find resources call and specify "system.type.group" as the type of sub-resources to get:
+Lets look at New York's groups. The New York branch's id is used as the parent_id here:
 ```
 GET /rights/resources?parent_id=9c0b2919-e5cc-447a-acd0-f5dc964d35d6&resource_type_id=system.type.group
+
+Response body:
 {
-  
+  count: 3,
+  pageNumber: 0,
+  results: [{
+    id: "7fb8a67f-5e10-4607-bc71-d2cebbae1ee2"
+    name: "Store Managers"
+  },{
+    id: "c7fe4129-550c-4961-84e8-e8c4b1ced44c"
+    name: "Point of Sales"
+  },{
+    id: "49872e59-72fa-4a14-aed2-abe96ff30674"
+    name: "Kitchen Staff"
+  }],
+  total: 3  
 }
-[{
-  parentId: "61c06c24-dccb-4c31-975b-d5f86283f6cf" (Burger Palace, London's id)
-  groupNames: ["Store Managers","Point of Sales","Kitchen Staff","Cleaners"]
-}]
+```
+VS. London's groups:
+```
+GET /rights/resources?parent_id=61c06c24-dccb-4c31-975b-d5f86283f6cf&resource_type_id=system.type.group
+
+Response body:
+{
+  count: 4,
+  pageNumber: 0,
+  results: [{
+    id: "7fb8a67f-5e10-4607-bc71-d2cebbae1ee2"
+    name: "Store Managers"
+  },{
+    id: "c7fe4129-550c-4961-84e8-e8c4b1ced44c"
+    name: "Point of Sales"
+  },{
+    id: "49872e59-72fa-4a14-aed2-abe96ff30674"
+    name: "Kitchen Staff"
+  },{
+    id: "c3615a3e-700f-4121-a439-392273c7489c"
+    name: "Cleaners"
+  }],
+  total: 4  
+}
 ```
 
 

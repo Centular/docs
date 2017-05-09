@@ -12,22 +12,22 @@ PERMISSIONS form the link between the MEMBERSHIP and CONTENT trees, and the shor
 
 <img src="http://s3-eu-west-1.amazonaws.com/centular-resources/doc-images/permission+tree.png" alt="permission-tree" class="inline"/>
 
-In the diagram above, Resource P213 is our reference node. It has one user group "User Group A" with two users, "User 24" and "User 87". Down its content tree it has a group of resources of type "Resource Type A". There can be multiple collections with different types under a resource as shown by "Resource Type n".
-"Resource Type A" collection has two resources, "Resource A98" and "Resource A332" with "Resource Type X" and "Resource X46" in turn under "Resource A332".
+In the diagram above, Resource 1 is our reference node. It has one user group "User Group A" with two users, "User 1" and "User 1". Down its content tree it has a group of resources of type "Resource Type A". There can be multiple collections with different types under a resource as shown by "Resource Type n".
+"Resource Type A" collection has two resources, "Resource A1" and "Resource A2" with "Resource Type X" and "Resource X1" in turn under "Resource A2".
 
 Permissions are evaluated bottom-up, meaning, the content tree is traversed from the accessed resource in the the reverse direction until a PERMISSION link is found between the user MEMBERSHIP tree and the resource's CONTENT tree (or none is found, in which case acces is denied).
 
-**Example 1:** "User 87" wants to access "Resource X46" way at the bottom, so the applied permission path will be:
+**Example 1:** "User 1" wants to access "Resource X1" way at the bottom, so the applied permission path will be:
 ```
-("User 87") -> [PERMISSION {read,write,delete}] -> ("Resource A332") -> [CONTENT link] -> ("Resource Type X") -> [CONTENT link] -> ("Resource X46")
+("User 1") -> [PERMISSION {read,write,delete}] -> ("Resource A2") -> [CONTENT] -> ("Resource Type X") -> [CONTENT] -> ("Resource X1")
 ```
-So "User 87" has "read", "write" and "delete" permission to "Resource X46", and for that matter any resource under "Resource A 322"
+So "User 1" has "read", "write" and "delete" permission to "Resource X1", and for that matter any resource under "Resource A2"
 
-**Example 2:** "User 24" wants to access the same resource "Resource X46". In this case, "User 24" has no direct permission to any parent in the CONTENT tree, but it's a member of "User Group A" that does:
+**Example 2:** "User 2" wants to access the same resource "Resource X1". In this case, "User 2" has no direct permission to any parent in the CONTENT tree, but it is a member of "User Group A" that does:
 ```
-("User 24") -> [MEMBER_OF] -> ("User Group A") -> [PERMISSION {read}] -> ("Resource Type A") -> [CONTENT] -> ("Resource A332") -> [CONTENT] -> ("Resource Type X") -> [CONTENT] -> ("Resource X46")
+("User 2") -> [MEMBER_OF] -> ("User Group A") -> [PERMISSION {read}] -> ("Resource Type A") -> [CONTENT] -> ("Resource A2") -> [CONTENT] -> ("Resource Type X") -> [CONTENT] -> ("Resource X1")
 ```
-So, "User 24" has "read" permission on "Resource X46" due to its membership of "User Group A".
+So, "User 2" has "read" permission on "Resource X1" due to its membership of "User Group A".
 
 So in conclusion, permissions are given to Users and/or Groups to Resources and/or Resource Types OF Resources. A permission on a resource affects the permission you have on the children of that resource as well.
 

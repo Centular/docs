@@ -10,7 +10,7 @@ The CONTENT tree of a RESOURCE can be mirrored with a similar structure for USER
 
 PERMISSIONS form the link between the MEMBERSHIP and CONTENT trees, and the shortest route between a USER and a RESOURCE or RESOURCE TYPE along this link resolves to the USER's PERMISSION to the RESOURCE
 
-<img src="http://s3-eu-west-1.amazonaws.com/centular-resources/doc-images/permission-tree.png" alt="hi" class="inline"/>
+<img src="http://s3-eu-west-1.amazonaws.com/centular-resources/doc-images/permission+tree.png" alt="permission-tree" class="inline"/>
 
 In the diagram above, Resource P213 is our reference node. It has one user group "User Group A" with two users, "User 24" and "User 87". Down its content tree it has a group of resources of type "Resource Type A". There can be multiple collections with different types under a resource as shown by "Resource Type n".
 "Resource Type A" collection has two resources, "Resource A98" and "Resource A332" with "Resource Type X" and "Resource X46" in turn under "Resource A332".

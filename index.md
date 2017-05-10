@@ -255,6 +255,34 @@ POST /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/resource-type-permissio
 }
 ```
 ## Joining Users to Groups
+Normally, users are registered through the sign-up process, but for the sake of this example we will be adding a couple of miscellaneous resources as users:
+```
+POST /rights/resources
+{
+  parentId: "{your-domain-id}", (Your domain id will be a UUID e.g. "e4a68bbe-1cb7-42f4-8ab9-a3a7950128f5")
+  resourceTypeId: "system.type.user",
+  resources: [{
+    id: "b440c3fb-5ebd-4f52-84fd-e8ddbb780946"
+    name: "John Manager"
+  },{
+    id: "5d94a8c4-99cf-4124-8ec1-93bf3ed5c9c7"
+    name: "Jane Sales"
+  },{
+    id: "88609ccc-a8bd-476f-8aa7-d56e0b8a5a6b"
+    name: "Jim Prepares"
+  },{
+    id: "c2f718f7-a327-4f61-981e-54574d1f2fb8"
+    name: "Lars Manager"
+  },{
+    id: "a29b58e2-b421-45df-8eea-d96e3a54e7a"
+    name: "Lynn Sales"
+  },{
+    id: "aff028ec-4cf4-4cf8-b444-2d15bb01a25c"
+    name: "Leam Prepares"
+  }]
+}
+```
+
 Lets add some staff to the New York branch:
 ```
 //Add a Store Manager at New York

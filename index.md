@@ -320,8 +320,6 @@ PUT /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/users
 ```
 
 ## Checking Permissions
-
-
 Ok, so lets create an order at New York for example:
 ```
 POST /rights/resources
@@ -346,6 +344,38 @@ POST /rights/resources
   }]
 }
 ```
+
+Lets look the permissions a sales person have on these new orders.
+"Jane Sales" should have read, write & delete permission on "Order #NY-1", but no permission on "Order #LON-1":
+```
+GET /rights/users/5d94a8c4-99cf-4124-8ec1-93bf3ed5c9c7/resource-permission?resource_id=eb22b07b-afe0-4991-8bee-a284ebddc1d1&resource_id=f9e9bb5b-d04f-4cb7-a7b2-f33ef5d30fd8
+Response Body:
+[{
+  objectId: "eb22b07b-afe0-4991-8bee-a284ebddc1d1",
+  objectName: "Order #NY-1",
+  permission: 7
+},{
+  objectId: "f9e9bb5b-d04f-4cb7-a7b2-f33ef5d30fd8",
+  objectName: "Order #LON-1",
+  permission: 0
+}]
+```
+Being Kitchen Staff at New York, "Jim Prepares" should have "read" permission on "Order #NY-1" so that he can see what to perpare, but he shouldn't see any London orders:
+```
+GET /rights/users/5d94a8c4-99cf-4124-8ec1-93bf3ed5c9c7/resource-permission?resource_id=eb22b07b-afe0-4991-8bee-a284ebddc1d1&resource_id=f9e9bb5b-d04f-4cb7-a7b2-f33ef5d30fd8
+Response Body:
+[{
+  objectId: "eb22b07b-afe0-4991-8bee-a284ebddc1d1",
+  objectName: "Order #NY-1",
+  permission: 1
+},{
+  objectId: "f9e9bb5b-d04f-4cb7-a7b2-f33ef5d30fd8",
+  objectName: "Order #LON-1",
+  permission: 0
+}]
+```
+
+
 
 
 

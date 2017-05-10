@@ -247,19 +247,53 @@ POST /rights/groups/49872e59-72fa-4a14-aed2-abe96ff30674/resource-type-permissio
 ```
 ...and London Kitchen Staff:
 ```
-POST /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/resource-permissions
+POST /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/resource-type-permissions
 {
   parentId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
   resourceTypeId: "burgerpalice-type-order"
   permission: 1
 }
 ```
-We will be leaving out Cleaners at London to illustrate denied access.
-
-
-
-
 ## Joining Users to Groups
+Lets add some staff to the New York branch:
+```
+//Add a Store Manager at New York
+PUT /rights/groups/7fb8a67f-5e10-4607-bc71-d2cebbae1ee2/users
+{
+  userIds: ["b440c3fb-5ebd-4f52-84fd-e8ddbb780946"]
+}
+
+//Add a Point of Sales person at New York
+PUT /rights/groups/c7fe4129-550c-4961-84e8-e8c4b1ced44c/users
+{
+  userIds: ["5d94a8c4-99cf-4124-8ec1-93bf3ed5c9c7"]
+}
+
+//Add a Kitchen Staff member at New York
+PUT /rights/groups/49872e59-72fa-4a14-aed2-abe96ff30674/users
+{
+  userIds: ["88609ccc-a8bd-476f-8aa7-d56e0b8a5a6b"]
+}
+
+//Add a Store Manager at London
+PUT /rights/groups/148a3a24-99f5-4eea-a85f-057e0bce0a38/users
+{
+  userIds: ["c2f718f7-a327-4f61-981e-54574d1f2fb8"]
+}
+
+//Add a Point of Sales person at London
+PUT /rights/groups/4b8e1da6-b07e-4722-b870-ca93439d45c8/users
+{
+  userIds: ["a29b58e2-b421-45df-8eea-d96e3a54e7a"]
+}
+
+//Add a Kitchen Staff member at London
+PUT /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/users
+{
+  userIds: ["aff028ec-4cf4-4cf8-b444-2d15bb01a25c"]
+}
+```
+
 
 ## Checking Permissions
 

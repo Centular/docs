@@ -347,6 +347,7 @@ POST /rights/resources
 
 Lets look the permissions a sales person have on these new orders.
 "Jane Sales" should have read, write & delete permission on "Order #NY-1", but no permission on "Order #LON-1":
+
 ```
 GET /rights/users/5d94a8c4-99cf-4124-8ec1-93bf3ed5c9c7/resource-permission?resource_id=eb22b07b-afe0-4991-8bee-a284ebddc1d1&resource_id=f9e9bb5b-d04f-4cb7-a7b2-f33ef5d30fd8
 Response Body:
@@ -373,3 +374,4 @@ Response Body:
   objectName: "Order #LON-1",
   permission: 0
 }]
+```

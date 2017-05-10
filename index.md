@@ -51,7 +51,7 @@ GET /rights/resources?parent_id={yout-domain-id}&resource_type_id=system.type:
 The use of these will become clearer as we go through some examples.
 To manage resource types, use the [Resource API](http://api-docs.centular.io/#/rights324532resource32types)
 and register your own resource types under your domain as if they are normal resources, specifying **"system.type"** as the resource type.
-Our company (The Burger Palace) will have a collection of franchises, each franchise will accept orders, each order will have items associated. So lets create these resource types:
+Our company (The Burger Palace) will have a collection of franchises, each franchise will accept orders. So lets create these resource types:
 ```
 POST /rights/resources
 {
@@ -63,9 +63,6 @@ POST /rights/resources
   },{
     id: "burgerpalice-type-order"
     name: "Orders"
-  },{
-    id: "burgerpalice-type-item"
-    name: "Items"
   }]
 }
 ```
@@ -322,12 +319,39 @@ PUT /rights/groups/fee7a235-e0c3-4d57-9be2-7cd26ec9c263/users
 }
 ```
 
-
 ## Checking Permissions
 
 
+Ok, so lets create an order at New York for example:
+```
+POST /rights/resources
+{
+  parentId: "9c0b2919-e5cc-447a-acd0-f5dc964d35d6", (The New York branch id)
+  resourceTypeId: "burgerpalice-type-order",
+  resources: [{
+    id: "eb22b07b-afe0-4991-8bee-a284ebddc1d1"
+    name: "Order #NY-1"
+  }]
+}
+```
+...and one at London as well:
+```
+POST /rights/resources
+{
+  parentId: "61c06c24-dccb-4c31-975b-d5f86283f6cf", (The London branch id)
+  resourceTypeId: "burgerpalice-type-order",
+  resources: [{
+    id: "f9e9bb5b-d04f-4cb7-a7b2-f33ef5d30fd8"
+    name: "Order #LON-1"
+  }]
+}
+```
 
-The numbering in these nodes are conceptual and will soon become IDs when you start using the system.
+
+
+
+
+
 
 
 ```markdown
